@@ -1,0 +1,21 @@
+name: foo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy me a page
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@v2.0.0
+      env:
+        REPO: self
+        BRANCH: gh-pages
+        FOLDER: some_page
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
